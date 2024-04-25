@@ -480,7 +480,7 @@ define network::interface (
 
   # RedHat specific for zLinux
   Optional[Array] $subchannels     = undef,
-  Optional[String] $nettype = undef
+  Optional[String] $nettype        = undef,
   Optional[Integer[0,1]] $layer2   = undef,
   Optional[String] $zlinux_options = undef,
 
