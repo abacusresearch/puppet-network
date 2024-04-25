@@ -72,7 +72,7 @@
 # Deploys the file /etc/sysconfig/network/ifroute-$name.
 #
 define network::mroute (
-  $routes,
+  Hash $routes,
   $interface           = $name,
   $config_file_notify  = 'class_default',
   $restart_all_nic     = false,
@@ -83,7 +83,6 @@ define network::mroute (
   $table               = undef,
 ) {
   # Validate our arrays
-  validate_hash($routes)
 
   include ::network
   $real_reload_command = $reload_command ? {
