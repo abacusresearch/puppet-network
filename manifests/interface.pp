@@ -480,7 +480,7 @@ define network::interface (
 
   # RedHat specific for zLinux
   Optional[Array] $subchannels      = undef,
-  Enum['qeth','lcs','ctc'] $nettype = undef,
+  Optional[String] $nettype = undef,
   Optional[Integer[0,1]] $layer2    = undef,
   Optional[String] $zlinux_options  = undef,
 
@@ -515,6 +515,8 @@ define network::interface (
 
   # $subchannels is only valid for zLinux/SystemZ/s390x.
   if $::architecture == 's390x' {
+    assert_type(Array, $subchannels)
+    assert_type(Enum['qeth','lcs','ctc'], $nettype)
     # Different parameters required for RHEL6 and RHEL7
     if $::operatingsystemmajrelease =~ /^7|^8/ {
       assert_type(String, $zlinux_options)
